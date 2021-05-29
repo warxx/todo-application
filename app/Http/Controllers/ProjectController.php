@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
@@ -14,6 +15,10 @@ class ProjectController extends Controller
     public function index()
     {
         // get data from db
+        //$projects = Project::all();
+        //$projects = Project::orderBy('name', 'desc')->get();
+        //$projects = Project::where('name', 'first project')->get();
+        //$projects = Project::latest()->get();
 
         $projects = [
             ['id' => '1', 'name' => 'project-1', 'description' => 'Some cool description...'],
