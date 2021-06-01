@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Project;
 
-class ProjectController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +15,20 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        
         // get data from db
-        $projects = Project::all();
-        //$projects = Project::orderBy('name', 'desc')->get();
-        //$projects = Project::where('name', 'first project')->get();
-        //$projects = Project::latest()->get();
+        //$tasks = Task::all();
+        //$tasks = Task::orderBy('name', 'desc')->get();
+        //$tasks = Task::where('name', 'first project')->get();
+        //$tasks = Task::latest()->get();
 
-        return view('projects.all', ['projects' => $projects]);
+        $tasks = [
+            ['id' => '1', 'name' => 'task-1', 'description' => 'Some cool description...'],
+            ['id' => '2', 'name' => 'task-2', 'description' => 'Some cool description...'],
+            ['id' => '3', 'name' => 'task-3', 'description' => 'Some cool description...']
+        ];
+
+        return view('tasks.all', ['tasks' => $tasks]);
     }
 
     /**
@@ -30,7 +38,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        $projects = Project::all();
+
+        return view('tasks.create', $projects);
     }
 
     /**
@@ -41,17 +51,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $project = new Project();
-
-        $user_id = auth()->user()->id;
-
-        $project->name = $request->name;
-        $project->description = $request->description;
-        $project->user_id = $user_id;
-
-        $project->save();
-
-        return redirect()->route('projects.index');
+        //
     }
 
     /**
@@ -62,9 +62,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::findOrFail($id);
-
-        return view('projects.details', $project);
+        //
     }
 
     /**
