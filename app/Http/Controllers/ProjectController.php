@@ -36,7 +36,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -58,7 +58,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return view('projects.details', ['id' => $id, 'oho' => 'opa']);
+        $project = Project::findOrFail($id);
+
+        return view('projects.details', $project);
     }
 
     /**
