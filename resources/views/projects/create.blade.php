@@ -1,10 +1,10 @@
 @extends('layouts.main-layout')
 
 @section('content')
-<div class="container">
+<div class="container c-project">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div>
+            <div class="c-project__title">
                 <h1>Create new project</h1>
             </div>
             <form action="/projects" method="POST" >

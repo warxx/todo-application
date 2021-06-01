@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Status;
+use App\Models\Task;
 
 class TaskController extends Controller
 {
@@ -17,16 +19,10 @@ class TaskController extends Controller
     {
         
         // get data from db
-        //$tasks = Task::all();
+        $tasks = Task::all();
         //$tasks = Task::orderBy('name', 'desc')->get();
         //$tasks = Task::where('name', 'first project')->get();
         //$tasks = Task::latest()->get();
-
-        $tasks = [
-            ['id' => '1', 'name' => 'task-1', 'description' => 'Some cool description...'],
-            ['id' => '2', 'name' => 'task-2', 'description' => 'Some cool description...'],
-            ['id' => '3', 'name' => 'task-3', 'description' => 'Some cool description...']
-        ];
 
         return view('tasks.all', ['tasks' => $tasks]);
     }
@@ -40,7 +36,7 @@ class TaskController extends Controller
     {
         $projects = Project::all();
 
-        return view('tasks.create', $projects);
+        return view('tasks.create', ['projects' => $projects]);
     }
 
     /**
@@ -51,7 +47,20 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new Task();
+
+        $user_id = auth()->user()->id; 
+        $status_id = Status::where('name', 'todo')->first()['id'];
+
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->status_id = $status_id;
+        $task->user_id = $user_id;
+        $task->project_id = $request->projects;
+
+        $task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**

@@ -28,6 +28,6 @@ Route::get('/projects/{id}', 'ProjectController@show');
 //tasks
 Route::get('/tasks', 'TaskController@index')->name('tasks.index');
 Route::get('/tasks/create', 'TaskController@create')->name('tasks.create')->middleware('auth');
-Route::post('/tasks', 'TasksController@store');
+Route::post('/tasks', 'TaskController@store');
 
 Auth::routes();
