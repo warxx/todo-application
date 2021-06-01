@@ -10005,3 +10005,14 @@ h3 {
 .main {
   padding-top: 20px;
 }
+
+.c-project__title {
+  margin-top: 20px;
+}
+
+.c-task__title {
+  margin-top: 20px;
+}
+.c-task__tasks-table-title {
+  margin-top: 20px;
+}

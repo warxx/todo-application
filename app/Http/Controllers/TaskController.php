@@ -19,12 +19,13 @@ class TaskController extends Controller
     {
         
         // get data from db
-        $tasks = Task::all();
+        $todo_tasks = Task::where('status_id', '3')->get();
+        $completed_tasks = Task::where('status_id', '4')->get();
         //$tasks = Task::orderBy('name', 'desc')->get();
         //$tasks = Task::where('name', 'first project')->get();
         //$tasks = Task::latest()->get();
 
-        return view('tasks.all', ['tasks' => $tasks]);
+        return view('tasks.all', ['todo_tasks' => $todo_tasks, 'completed_tasks' => $completed_tasks]);
     }
 
     /**
