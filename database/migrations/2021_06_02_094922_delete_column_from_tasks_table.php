@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStatusIdToTasksTable extends Migration
+class DeleteColumnFromTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AddStatusIdToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedBigInteger('status_id');
-            $table->foreign('status_id')
-                        ->references('id')->on('statuses')->onDelete('cascade');
+            $table->dropForeign('tasks_status_id_foreign');
+            $table->dropColumn('status_id');
         });
     }
 
@@ -28,8 +27,9 @@ class AddStatusIdToTasksTable extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->dropForeign('tasks_status_id_foreign');
-            $table->dropColumn('status_id');
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')
+                        ->references('id')->on('statuses')->onDelete('cascade');
         });
     }
 }

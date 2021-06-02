@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatusTable extends Migration
+class AddStatusToTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('statuses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name', 100);
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->enum('status', ['todo', 'completed']);
         });
     }
 
@@ -27,6 +25,8 @@ class CreateStatusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statuses');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 }

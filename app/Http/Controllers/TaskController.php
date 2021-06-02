@@ -50,13 +50,12 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $user_id = auth()->user()->id; 
-        $status_id = Status::where('name', 'todo')->first()['id'];
+        $user = auth()->user();
 
         $task->name = $request->name;
         $task->description = $request->description;
-        $task->status_id = $status_id;
-        $task->user_id = $user_id;
+        $task->user()->associate($user->getKey());
+        $task->status = Task::todo;
         $task->project_id = $request->projects;
 
         $task->save();
