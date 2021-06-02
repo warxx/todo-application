@@ -10006,6 +10006,10 @@ h3 {
   padding-top: 20px;
 }
 
+.c-header__links-container {
+  display: flex;
+}
+
 .c-project__title {
   margin-top: 20px;
 }

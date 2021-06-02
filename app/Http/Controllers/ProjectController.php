@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 
+use Illuminate\Support\Facades\Auth;
+
 class ProjectController extends Controller
 {
     /**
@@ -42,12 +44,12 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $project = new Project();
-
-        $user_id = auth()->user()->id;
+        
+        $user = Auth::user();
 
         $project->name = $request->name;
         $project->description = $request->description;
-        $project->user_id = $user_id;
+        $project->user()->associate($user->getKey());
 
         $project->save();
 

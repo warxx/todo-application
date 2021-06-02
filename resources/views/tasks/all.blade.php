@@ -53,6 +53,8 @@
                 </tbody>
                 @endforeach
             </table>
+
+            <a href="{{ route('tasks.create') }}" class="btn btn-outline-primary">CREATE NEW TASK<a/>
         </div>
     </div>
 </div>

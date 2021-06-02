@@ -8,6 +8,8 @@ use App\Models\Project;
 use App\Models\Status;
 use App\Models\Task;
 
+use Illuminate\Support\Facades\Auth;
+
 class TaskController extends Controller
 {
     /**
@@ -19,8 +21,8 @@ class TaskController extends Controller
     {
         
         // get data from db
-        $todo_tasks = Task::where('status_id', '3')->get();
-        $completed_tasks = Task::where('status_id', '4')->get();
+        $todo_tasks = Task::where('status', Task::todo)->get();
+        $completed_tasks = Task::where('status', Task::completed)->get();
         //$tasks = Task::orderBy('name', 'desc')->get();
         //$tasks = Task::where('name', 'first project')->get();
         //$tasks = Task::latest()->get();
@@ -50,7 +52,7 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         $task->name = $request->name;
         $task->description = $request->description;

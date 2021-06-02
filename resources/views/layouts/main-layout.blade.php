@@ -56,7 +56,14 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item c-header__links-container">
+                                <a class="nav-link" href="{{ route('projects.index') }}">
+                                    Projects
+                                </a>
+                                <a class="nav-link" href="{{ route('tasks.index') }}">
+                                    Tasks
+                                </a>
+
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>

@@ -1,15 +1,36 @@
 @extends('layouts.main-layout')
 
 @section('content')
-<div>
-    <h3>this is list of all projects</h3>
+<div class="container c-task">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            
+            <div class="c-task__tasks-table-title">
+                <h2>TODO Tasks</h2>
+            </div>
+            
+            <table class="table">  
+                <thead>
+                    <tr>
+                      <th scope="col">Nameee</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Created at</th>
+                      <th></th>
+                    </tr>
+                </thead>  
+                @foreach($projects as $project)
+                <tbody>
+                    <tr>
+                        <td>{{ $project['name'] }}</td>
+                        <td>{{ $project['description'] }}</td>
+                        <td>{{ $project['created_at'] }}</td>
+                    </tr>
+                </tbody>
+                @endforeach
+            </table>
 
-    @foreach($projects as $project)
-        <div">
-            <p>ID: {{ $project['id'] }}</p>
-            <p>Name: {{ $project['name'] }}</p>
-            <p>Description: {{ $project['description'] }}</p>
+            <a href="{{ route('projects.create') }}" class="btn btn-outline-primary">CREATE NEW PROJECT<a/>
         </div>
-    @endforeach
-<div>
+    </div>
+</div>
 @endsection
