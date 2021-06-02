@@ -18,8 +18,8 @@
                 <input name="description" type="text" class="form-control" id="description">
               </div>
               <div class="mb-3">
-                <label for="projects" class="form-label">Projects</label>
-                <select name="projects" class="form-control" id="projects">
+                <label for="project" class="form-label">Projects</label>
+                <select name="project" class="form-control" id="project">
                     @foreach($projects as $project) {
                         <option value="{{ $project['id'] }}">{{ $project['name'] }}</option>
                     }

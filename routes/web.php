@@ -22,12 +22,13 @@ Route::get('/', function () {
 //projects
 Route::get('/projects', 'ProjectController@index')->name('projects.index');
 Route::get('/projects/create', 'ProjectController@create')->name('projects.create')->middleware('auth');
-Route::post('/projects', 'ProjectController@store');
+Route::post('/projects', 'ProjectController@store')->middleware('auth');
 Route::get('/projects/{id}', 'ProjectController@show');
 
 //tasks
 Route::get('/tasks', 'TaskController@index')->name('tasks.index');
 Route::get('/tasks/create', 'TaskController@create')->name('tasks.create')->middleware('auth');
-Route::post('/tasks', 'TaskController@store');
+Route::post('/tasks', 'TaskController@store')->middleware('auth');
+Route::post('/tasks/change-status', 'TaskController@changeTaskStatus')->name('tasks.change-status')->middleware('auth');
 
 Auth::routes();

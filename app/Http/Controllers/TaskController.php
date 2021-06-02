@@ -58,7 +58,7 @@ class TaskController extends Controller
         $task->description = $request->description;
         $task->user()->associate($user->getKey());
         $task->status = Task::todo;
-        $task->project_id = $request->projects;
+        $task->project_id = $request->project;
 
         $task->save();
 
@@ -108,5 +108,15 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeTaskStatus(Request $request) {
+        $task_id = $request->id;
+
+        $task = Task::findOrFail($task_id);
+        $task->status = $request->status;
+        $task->save();
+
+        return response()->json(['task'=> $task]);
     }
 }
