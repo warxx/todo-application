@@ -37,8 +37,6 @@ class TaskController extends Controller
      */
     public function create()
     {
-        dd('hello');
-
         $projects = Project::all();
 
         return view('tasks.create', ['projects' => $projects]);
@@ -127,7 +125,9 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Task::findOrFail($id)->delete();
+
+        return response()->json(['response'=> 'Successfully deleted!']);
     }
 
     public function changeTaskStatus(Request $request) {

@@ -11564,7 +11564,18 @@ h3 {
   padding: 0;
 }
 .c-task__single-task-status {
-  color: green;
   font-weight: 700;
   text-transform: uppercase;
+}
+.c-task__single-task-status--todo {
+  color: red;
+}
+.c-task__single-task-status--completed {
+  color: green;
+}
+.c-task__remove-task-btn {
+  vertical-align: middle !important;
+}
+.c-task__remove-task-btn svg {
+  cursor: pointer;
 }

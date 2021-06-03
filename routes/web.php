@@ -33,5 +33,6 @@ Route::post('/tasks', 'TaskController@store')->middleware('auth');
 Route::post('/tasks/change-status', 'TaskController@changeTaskStatus')->name('tasks.change-status')->middleware('auth');
 Route::get('/tasks/edit/{id}', 'TaskController@edit')->name('tasks.edit')->middleware('auth');
 Route::put('/tasks/{id}', 'TaskController@update')->name('tasks.update')->middleware('auth');
+Route::delete('/tasks/{id}', 'TaskController@destroy')->name('tasks.destroy')->middleware('auth');
 
 Auth::routes();

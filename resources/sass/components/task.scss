@@ -12,8 +12,24 @@
     }
 
     &__single-task-status {
-        color: green;
+        
         font-weight: 700;
         text-transform: uppercase;
+
+        &--todo {
+            color: red;
+        }
+
+        &--completed {
+            color: green;
+        }
+    }
+
+    &__remove-task-btn {
+        vertical-align: middle !important;
+
+        svg {
+            cursor: pointer;
+        }
     }
 }
