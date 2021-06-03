@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nameee</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Created at</th>
                         <th scope="col">Status</th>
@@ -24,7 +24,7 @@
                 <tbody>
                     <tr class="c-tasks__table-row-todo">
                         <td class="c-tasks__table-row-id">{{ $task['id'] }}</td>
-                        <td>{{ $task['name'] }}</td>
+                        <td><a href="{{ route('tasks.show', $task['id']) }}" class="btn btn-link c-task__table-row-title">{{ $task['name'] }}</a></td>
                         <td>{{ $task['description'] }}</td>
                         <td>{{ $task['created_at'] }}</td>
                         <td class="c-tasks__table-row-status">{{ $task['status'] }}</td>
@@ -52,7 +52,7 @@
                 <tbody>
                     <tr class="c-tasks__table-row-completed">
                         <td class="c-tasks__table-row-id">{{ $task['id'] }}</td>
-                        <td>{{ $task['name'] }}</td>
+                        <td><a href="{{ route('tasks.show', $task['id']) }}" class="btn btn-link c-task__table-row-title">{{ $task['name'] }}</a></td>
                         <td>{{ $task['description'] }}</td>
                         <td>{{ $task['created_at'] }}</td>
                         <td class="c-tasks__table-row-status">{{ $task['status'] }}</td>
@@ -112,7 +112,7 @@
                     $(this).appendTo('.c-tasks__table-completed'); 
                     let completeButton = $(this).find('.c-tasks__table-button');
                     $(completeButton).text('Todo');
-                    $(this).find('.c-tasks__table-row-status').text('complete');
+                    $(this).find('.c-tasks__table-row-status').text('completed');
                     break;
                 case 'todo':
                     $(this).appendTo('.c-tasks__table-todo');

@@ -37,6 +37,8 @@ class TaskController extends Controller
      */
     public function create()
     {
+        dd('hello');
+
         $projects = Project::all();
 
         return view('tasks.create', ['projects' => $projects]);
@@ -50,6 +52,13 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        //validation
+        $request->validate([
+            'name' => ['required', 'string', 'min:4', 'max:100'],
+            'description' => ['required', 'string', 'min:4', 'max:255'],
+            'project' => ['required', 'numeric', 'exists:projects,id'],
+        ]);
+
         $task = new Task();
 
         $user = Auth::user();
@@ -73,7 +82,9 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return view('tasks.details', ['task' => $task]);
     }
 
     /**
@@ -84,7 +95,9 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return view('tasks.edit', ['task' => $task]);
     }
 
     /**
@@ -96,7 +109,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->status = $request->status;
+        $task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**

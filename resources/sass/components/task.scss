@@ -6,4 +6,14 @@
     &__tasks-table-title {
         margin-top: 20px;
     }
+
+    &__table-row-title {
+        padding: 0;
+    }
+
+    &__single-task-status {
+        color: green;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
 }

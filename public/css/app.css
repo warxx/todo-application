@@ -11560,3 +11560,11 @@ h3 {
 .c-task__tasks-table-title {
   margin-top: 20px;
 }
+.c-task__table-row-title {
+  padding: 0;
+}
+.c-task__single-task-status {
+  color: green;
+  font-weight: 700;
+  text-transform: uppercase;
+}
