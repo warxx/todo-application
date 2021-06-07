@@ -2,51 +2,53 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Project;
+use App\Models\User;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class ProjectControllerTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpUser();
+    }
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
-
-
-    public function test_create()
+    public function test_create_user()
     {
-        $register_credential = [
-            'name' => 'ivan',
-            'email' => 'ivan@nexpur.com',
-            'password' => 'start123',
-            'password_confirmation' => 'start123',
-        ];
-
-        $credential = [
-            'email' => 'ivan@nexpur.com',
-            'password' => 'start123'
-        ];
+        $loginUser = Auth::user();
         
-        $this->post('register',$register_credential)
-        ->assertRedirect('/');
-
-
-        $this->post('login',$credential)
-             ->assertRedirect('/');
-
-        $user = Auth::user();
-
         $params = [
             'name' => 'test-project',
             'description' => 'some test description...',
         ];
         
-        $response = $this->post(route('projects.create'), $params);
-
-        $response->assertStatus(200);
+        $response = $this->post(route('projects.store'),$params);
+        $response->assertStatus(302);
         $response->assertSessionHasNoErrors();
+
+        $project = Project::where('name', 'test-project')->where('description','some test description...')->where('user_id',$loginUser->id)->first();
+        $this->assertNotNull($project);
     }
+
+    // public function test_edit_user() {
+    //     $project_name = 'test-project-edited';
+    //     $project_description = 'some test description... edited';
+
+    //     $loginUser = Auth::user();
+
+    //     $params = [
+    //         'name' => $project_name,
+    //         'description' => $project_description
+    //     ];
+
+    //     $response = $this->put
+    // }
 }

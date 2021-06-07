@@ -22,14 +22,14 @@ Route::get('/', function () {
 //projects
 Route::get('/projects', 'ProjectController@index')->name('projects.index');
 Route::get('/projects/create', 'ProjectController@create')->name('projects.create')->middleware('auth');
-Route::post('/projects', 'ProjectController@store')->middleware('auth');
+Route::post('/projects', 'ProjectController@store')->name('projects.store')->middleware('auth');
 Route::get('/projects/{id}', 'ProjectController@show');
 
 //tasks
-Route::get('/tasks', 'TaskController@index')->name('tasks.index');
-Route::get('/tasks/{id}', 'TaskController@show')->name('tasks.show');
 Route::get('/tasks/create', 'TaskController@create')->name('tasks.create')->middleware('auth');
 Route::post('/tasks', 'TaskController@store')->middleware('auth');
+Route::get('/tasks', 'TaskController@index')->name('tasks.index');
+Route::get('/tasks/{id}', 'TaskController@show')->name('tasks.show');
 Route::post('/tasks/change-status', 'TaskController@changeTaskStatus')->name('tasks.change-status')->middleware('auth');
 Route::get('/tasks/edit/{id}', 'TaskController@edit')->name('tasks.edit')->middleware('auth');
 Route::put('/tasks/{id}', 'TaskController@update')->name('tasks.update')->middleware('auth');
